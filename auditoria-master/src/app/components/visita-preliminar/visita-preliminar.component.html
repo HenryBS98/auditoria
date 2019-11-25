@@ -1,0 +1,49 @@
+<div class="container">
+
+    <h1 style="margin-top: 25px;">
+        {{title}}
+    </h1>
+
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12 mb-3">
+            <label>Descripcion:</label>
+            <div class="input-group">
+                <textarea type="text" class="form-control" [(ngModel)]="descripcion" placeholder="Descripcion" rows="10"></textarea>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="button" (click)="CreateRecord()" [disabled]="!descripcion"
+                class="btn btn-primary">
+                Guardar</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12 mb-5">
+            <div class="card mb-3" *ngFor="let item of vta_pre">
+                <div class="card-body" *ngIf="!item.isEdit; else elseBlock">
+                    <h5 class="card-title">Visita Preliminar</h5>
+                    <p class="card-text">{{item.Descripcion}}</p>
+                    <a href="#" class="card-link" (click)="EditRecord(item)">Editar</a>
+                    <a href="#" class="card-link" (click)="RemoveRecord(item.id)">Borrar</a>
+                </div>
+                <ng-template #elseBlock>
+                    <div class="card-body">
+                        <h5 class="card-title">Editar</h5>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" [(ngModel)]="item.EditDescripcion"
+                                        placeholder="Editar Descripcion">
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="card-link" (click)="item.isEdit = false">Cancelar</a>
+                        <a href="#" class="card-link" (click)="UpdateRecord(item)">Actualizar</a>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+
+</div>
